@@ -1,0 +1,180 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:Controls="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls"
+    x:Class="BinDay.Views.AddBinView"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+	<phone:PhoneApplicationPage.Resources>
+
+		<DataTemplate x:Key="ColourPickerDataTemplate">
+			<Grid Margin="0,0,0,0" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="45"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="1" 
+						   Text="{Binding ColourLabel}" 
+						   x:Name="ColourName" 
+						   Margin="15,0,3,0" 
+						   TextWrapping="Wrap" 
+						   />
+				<Rectangle Fill="{Binding Brush}" 
+						   x:Name="Brush" 
+						   Margin="0" 
+						   Width="45" 
+						   Height="45" 
+						   StrokeThickness="2" Stroke="#FF7D7D7D"
+						   />
+			</Grid>
+		</DataTemplate>
+		
+		
+		<DataTemplate x:Key="BinTypeDataTemplate">
+			<Grid>
+				<TextBlock Margin="0,0,1,0" 
+						   TextWrapping="Wrap" 
+						   Text="{Binding Converter={StaticResource BinTypeLocalization}}" 
+						   d:LayoutOverrides="Width, Height"/>
+			</Grid>
+		</DataTemplate>
+		
+		
+		<DataTemplate x:Key="PopupItemsDataTemplate">
+			<Grid Margin="15,0,0,0" Width="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="50"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="1" 
+						   Text="{Binding ColourLabel}" 
+						   x:Name="ColourName" 
+						   Margin="15,0,3,0" 
+						   TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeLarge}" 
+						   />
+				<Rectangle Fill="{Binding Brush}" 
+						   x:Name="Brush" 
+						   Margin="0" 
+						   Width="50" 
+						   Height="50" 
+						   StrokeThickness="2" Stroke="#FF7D7D7D"
+						   />
+			</Grid>
+		</DataTemplate>
+
+	</phone:PhoneApplicationPage.Resources>
+
+	<phone:PhoneApplicationPage.FontFamily>
+		<StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+	</phone:PhoneApplicationPage.FontFamily>
+	<phone:PhoneApplicationPage.FontSize>
+		<StaticResource ResourceKey="PhoneFontSizeNormal"/>
+	</phone:PhoneApplicationPage.FontSize>
+	<phone:PhoneApplicationPage.Foreground>
+		<StaticResource ResourceKey="PhoneForegroundBrush"/>
+	</phone:PhoneApplicationPage.Foreground>
+	
+	
+<!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+    	<!--<Grid.Background>
+    		<ImageBrush Stretch="Fill" ImageSource="PageBackground.png"/>
+    	</Grid.Background>-->
+        <Grid.RowDefinitions>
+        	<RowDefinition Height="Auto"/>
+        	<RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel -->
+        <StackPanel 
+			x:Name="TitlePanel" 
+			Grid.Row="0" 
+			Margin="12,17,0,28">
+			<TextBlock 
+				x:Name="ApplicationTitle" 
+				Text="{Binding LocalizedResources.ApplicationName, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" 
+				Style="{StaticResource PhoneTextNormalStyle}" 
+				Margin="0,0,12,0"/>
+            <TextBlock 
+				x:Name="PageTitle" 
+				Text="page name" 
+				Margin="0,-7,0,0" 
+				Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+		
+        <StackPanel 
+			x:Name="ContentPanel" 
+			Margin="12,0,12,8" 
+			Grid.Row="1" >
+			
+			<TextBlock 
+				Text="{Binding LocalizedResources.BinType, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" 
+				FontSize="{StaticResource PhoneFontSizeVerySmall}"/>
+        	<telerikInput:RadListPicker 
+        		x:Name="BinTypePicker"
+				SelectedItem="{Binding BinType, Mode=TwoWay}"	
+        		Margin="0,0,0,20" 
+        		VerticalAlignment="Top" 
+        		ItemTemplate="{StaticResource BinTypeDataTemplate}" 
+        		Height="60" 
+				/>
+			<!--cal:Message.Attach="[StateChanged] = [Action BinTypePicked(BinTypePicker.SelectedItem)]"-->
+			<TextBlock 
+				Text="{Binding LocalizedResources.BinColour, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" 
+				FontSize="{StaticResource PhoneFontSizeVerySmall}"/>
+        	<telerikInput:RadListPicker 
+        		x:Name="Colours"
+				SelectedIndex="{Binding BinColour, Converter={StaticResource BinColourToListIndex}, Mode=TwoWay}"
+				Margin="0,0,0,20" 
+        		ItemTemplate="{StaticResource ColourPickerDataTemplate}" 
+        		PopupHeader="{Binding LocalizedResources.PickColour, Source={StaticResource LocalizedStrings}}" 
+				Height="59" 
+				VerticalAlignment="Top" 
+				PopupItemTemplate="{StaticResource PopupItemsDataTemplate}" 
+				 />
+			<!--cal:Message.Attach="[StateChanged] = [Action ColourPicked(Colours.SelectedItem)]"-->
+			
+			
+			<TextBlock 
+				Text="{Binding LocalizedResources.BinDescription, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" 
+				FontSize="{StaticResource PhoneFontSizeVerySmall}"/>
+        	<TextBox 
+        		x:Name="Description"
+        		Margin="-12,0,-12,20" 
+        		TextWrapping="Wrap" 
+        		VerticalAlignment="Top" 
+				BorderThickness="2" 
+				Height="73"/>
+
+			<TextBlock 
+				Text="{Binding LocalizedResources.CollectionFrequency, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" 
+				FontSize="{StaticResource PhoneFontSizeVerySmall}"/>
+        	<telerikInput:RadNumericUpDown
+        		x:Name="Frequency"
+        		Height="71" 
+        		Margin="0,0,0,20" 
+        		VerticalAlignment="Top" 
+        		Header="{Binding LocalizedResources.Days, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" 
+        		BorderThickness="2" 
+				Padding="15,5,5,5" 
+				HorizontalContentAlignment="Stretch" 
+				FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+
+			<TextBlock Text="{Binding LocalizedResources.NextCollectionDate, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" FontSize="{StaticResource PhoneFontSizeVerySmall}"/>
+        	<telerikInput:RadDatePicker
+				DisplayValueFormat="D"
+        		x:Name="NextCollection"
+        		Margin="-12,0" 
+        		VerticalAlignment="Top"/>
+
+			<Button Content="{Binding LocalizedResources.Save, Source={StaticResource LocalizedStrings}}" Height="71" HorizontalAlignment="Center" x:Name="Save" VerticalAlignment="Top" Width="140" />
+        </StackPanel>
+	</Grid>
+</phone:PhoneApplicationPage>

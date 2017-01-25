@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="BinDay.Views.NextCollection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480" Width="259" Height="331">
+    
+    <Grid x:Name="LayoutRoot">
+    	<Canvas x:Name="CalendarPage" HorizontalAlignment="Left" Height="330.217" UseLayoutRounding="False" VerticalAlignment="Top" Width="259">
+    		<Canvas x:Name="CalPage" Height="330.217" Canvas.Left="0" Canvas.Top="-0.217" Width="259">
+    			<Path Data="F1M221.8438,48.229C216.7118,48.229,212.5548,44.069,212.5548,38.939C212.5548,33.808,216.7118,29.651,221.8438,29.651C226.9748,29.651,231.1328,33.808,231.1328,38.939C231.1328,44.069,226.9748,48.229,221.8438,48.229 M43.8018,48.229C38.6698,48.229,34.5118,44.069,34.5118,38.939C34.5118,33.808,38.6698,29.651,43.8018,29.651C48.9328,29.651,53.0908,33.808,53.0908,38.939C53.0908,44.069,48.9328,48.229,43.8018,48.229 M258.9998,25.006C258.9998,12.181,248.6028,1.78299999999999,235.7778,1.78299999999999L25.2228,1.78299999999999C12.3978,1.78299999999999,1.99979999999999,12.181,1.99979999999999,25.006L1.99979999999999,306.776C1.99979999999999,319.603,12.3978,330,25.2228,330L235.7778,330C248.6028,330,258.9998,319.603,258.9998,306.776z" Fill="#FF999999" Height="328.217" Canvas.Left="2" Stretch="Fill" Canvas.Top="2" Width="257"/>
+    			<Path Data="F1M219.8438,46.229C214.7118,46.229,210.5548,42.069,210.5548,36.939C210.5548,31.808,214.7118,27.651,219.8438,27.651C224.9748,27.651,229.1328,31.808,229.1328,36.939C229.1328,42.069,224.9748,46.229,219.8438,46.229 M41.8018,46.229C36.6698,46.229,32.5118,42.069,32.5118,36.939C32.5118,31.808,36.6698,27.651,41.8018,27.651C46.9328,27.651,51.0908,31.808,51.0908,36.939C51.0908,42.069,46.9328,46.229,41.8018,46.229 M256.9998,23.006C256.9998,10.181,246.6028,-0.217000000000013,233.7778,-0.217000000000013L23.2228,-0.217000000000013C10.3978,-0.217000000000013,-0.000200000000006639,10.181,-0.000200000000006639,23.006L-0.000200000000006639,304.776C-0.000200000000006639,317.603,10.3978,328,23.2228,328L233.7778,328C246.6028,328,256.9998,317.603,256.9998,304.776z" Fill="White" Height="328.217" Canvas.Left="0" Stretch="Fill" Canvas.Top="0" Width="257"/>
+    			<Path Data="F1M226.8105,242.0752C226.8105,250.5902,219.6105,257.5562,210.8105,257.5562L46.1895,257.5562C37.3905,257.5562,30.1895,250.5902,30.1895,242.0752C30.1895,233.5592,37.3905,226.5932,46.1895,226.5932L210.8105,226.5932C219.6105,226.5932,226.8105,233.5592,226.8105,242.0752" Fill="#FF333333" Height="30.963" Canvas.Left="30.19" Stretch="Fill" Canvas.Top="246.81" Width="196.621"/>
+    			<Path Data="F1M226.8105,87.2559C226.8105,95.7709,219.6105,102.7379,210.8105,102.7379L46.1895,102.7379C37.3905,102.7379,30.1895,95.7709,30.1895,87.2559C30.1895,78.7409,37.3905,71.7739,46.1895,71.7739L210.8105,71.7739C219.6105,71.7739,226.8105,78.7409,226.8105,87.2559" Fill="#FF333333" Height="30.964" Canvas.Left="30.19" Stretch="Fill" Canvas.Top="66.991" Width="196.621"/>
+    			<TextBlock 
+					x:Name="DayOfWeek" 
+					Height="34.549" 
+					Canvas.Left="30.19" 
+					Text="FRIDAY" 
+					Canvas.Top="63.406" 
+					Width="196.621" 
+					FontFamily="Segoe WP" 
+					FontSize="26.667" 
+					HorizontalAlignment="Center" 
+					TextAlignment="Center" 
+					FontWeight="Bold">
+    				<TextBlock.Foreground>
+    					<SolidColorBrush Color="White"/>
+    				</TextBlock.Foreground>
+    			</TextBlock>
+    			<TextBlock 
+					x:Name="Month" 
+					Height="35.231" 
+					Canvas.Left="30.19" 
+					Text="SEPTEMBER" 
+					Canvas.Top="242.542" 
+					Width="196.621" 
+					FontFamily="Segoe WP" 
+					FontSize="26.667" 
+					HorizontalAlignment="Center" 
+					TextAlignment="Center" 
+					FontWeight="Bold" 
+					Foreground="White"/>
+    			<TextBlock 
+					x:Name="Day"
+					Height="200.318" 
+					Canvas.Left="30.19" 
+					Text="29" 
+					Canvas.Top="64.455" 
+					Width="196.621" 
+					FontFamily="Segoe WP Black" 
+					FontSize="146.667" 
+					HorizontalAlignment="Center" 
+					TextAlignment="Center" 
+					FontWeight="Bold">
+    				<TextBlock.Foreground>
+    					<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+    				</TextBlock.Foreground>
+    			</TextBlock>
+    		</Canvas>
+    	</Canvas>
+    </Grid>
+</UserControl>

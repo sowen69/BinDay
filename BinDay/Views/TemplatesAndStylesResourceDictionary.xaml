@@ -1,0 +1,91 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:System="clr-namespace:System;assembly=mscorlib" 
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+	xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+	mc:Ignorable="d"
+	xmlns:Converters="clr-namespace:BinDay.Converters" 
+	xmlns:BinDay="clr-namespace:BinDay">
+	
+	<!-- Resource dictionary entries should be defined here. -->
+	<Converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+	<Converters:BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+	<Converters:BinColourToListIndexConverter x:Key="BinColourToListIndex"/>
+	<Converters:StringCaseConverter x:Key="StringCase"/>
+	<Converters:BinTypeLocalizationConverter x:Key="BinTypeLocalization"/>
+	
+	<System:Double x:Key="PhoneFontSizeVerySmall">14.667</System:Double>
+	<System:Double x:Key="PhoneFontSizeVeryVerySmall">11</System:Double>
+	
+	<DataTemplate x:Key="BinsDataTemplate">
+		<Border BorderThickness="0" BorderBrush="{StaticResource PhoneForegroundBrush}" Margin="0,0,0,10">
+			<Border.Background>
+				<SolidColorBrush Color="{StaticResource PhoneBackgroundColor}" Opacity="0.5"/>
+			</Border.Background>
+			<Grid Width="410" Height="75">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="60"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="73"/>
+				</Grid.ColumnDefinitions>
+				<toolkit:ContextMenuService.ContextMenu>
+					<toolkit:ContextMenu cal:Action.TargetWithoutContext="{Binding DataContext, ElementName=Bins}">
+						<!--<toolkit:MenuItem Header="{Binding LocalizedResources.Edit, Source={StaticResource LocalizedStrings}}" cal:Message.Attach="GotoEditBin()]"/>-->
+						<toolkit:MenuItem Header="{Binding LocalizedResources.Delete, Source={StaticResource LocalizedStrings}}" cal:Message.Attach="DeleteBin($dataContext)]"/>
+					</toolkit:ContextMenu>
+				</toolkit:ContextMenuService.ContextMenu>
+			
+				<BinDay:BinIndicator 
+					Grid.Column="0" 
+					BinColour="{Binding Colour}" 
+					TypeOfBin="{Binding Type}" 
+					Height="60" 
+					Width="Auto" 
+					Margin="0"/>
+			
+				<StackPanel Grid.Column="1" Orientation="Vertical" Margin="0">
+					<TextBlock x:Name="BinName" Text="{Binding BinName}" Margin="0,-2,1,0" TextWrapping="NoWrap" FontSize="{StaticResource PhoneFontSizeMedium}" />
+					<TextBlock x:Name="NextCollectionTitle" Margin="0,2,2,0" Text="{Binding LocalizedResources.NextCollectionDate, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" TextWrapping="NoWrap" FontSize="{StaticResource PhoneFontSizeVeryVerySmall}" />
+					<TextBlock Name="NextCollectionDate" Text="{Binding NextCollectionDate, Converter={StaticResource DateTimeToStringConverter}}" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="Segoe WP Light" Margin="0,-5,0,0"/>
+				</StackPanel>
+			
+				<StackPanel Grid.Column="2" Orientation="Vertical" Width="73">
+					<StackPanel.Background>
+						<SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
+					</StackPanel.Background>
+					<TextBlock Text="{Binding LocalizedResources.Every, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" FontSize="{StaticResource PhoneFontSizeVeryVerySmall}" HorizontalAlignment="Center" Margin="0,4,0,-3">
+						<TextBlock.Foreground>
+							<SolidColorBrush Color="{StaticResource PhoneBackgroundColor}"/>
+						</TextBlock.Foreground>
+					</TextBlock>
+					<TextBlock Name="CollectionFrequency" Text="{Binding CollectionFrequency}" HorizontalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="Segoe WP Black" Margin="0,-10,0,0">
+						<TextBlock.Foreground>
+							<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+						</TextBlock.Foreground>
+					</TextBlock>
+					<TextBlock Text="{Binding LocalizedResources.Days, Source={StaticResource LocalizedStrings}, Converter={StaticResource StringCase}}" FontSize="{StaticResource PhoneFontSizeVeryVerySmall}" HorizontalAlignment="Center" Padding="0" Margin="0,-10,0,0">
+						<TextBlock.Foreground>
+							<SolidColorBrush Color="{StaticResource PhoneBackgroundColor}"/>
+						</TextBlock.Foreground>
+					</TextBlock>
+				</StackPanel>
+			
+			</Grid>
+		</Border>
+	</DataTemplate>
+
+	<DataTemplate x:Key="NextCollectionDataTemplate">
+		<Grid Width="400" Height="75">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.25*"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="1" Orientation="Vertical">
+				<TextBlock x:Name="BinName" Text="{Binding BinName}" Margin="0,0,1,0" TextWrapping="NoWrap" FontSize="{StaticResource PhoneFontSizeLarge}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+</ResourceDictionary>

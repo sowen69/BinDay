@@ -1,0 +1,13 @@
+﻿V1.0.0.0	Launched into Marketplace 12 Aug 2011
+
+V1.0.0.1	Bug Fix: Changed from Colors.Brown to Color.FromArgb(255,105,65,1)
+			Built in Brown looks rust red on the WP7 screen
+
+			Actioned: 19 Aug 2011
+			Uploaded to Marketplace:
+
+			AddBinViewModel.cs Lines: 194 & 195
+			BinColourToListIndexConverter.cs Lines: 61, 103
+			
+			To upgrade users current data added code to
+			UpdateNextCollection.cs Lines: 26-35
